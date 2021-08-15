@@ -122,7 +122,7 @@ l = [x for x in range(100)]
 
 #1
 looking_for = 98   
-for i, el in enumerate(l)
+for i, el in enumerate(l):
     if el == looking_for:
         return True 
 
