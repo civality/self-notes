@@ -74,25 +74,47 @@ print(divide(3,0)) # None
 ------------------------>
 
 <------------------------
+l = ['a','b','c']
+d = dict.fromkeys(l, [0,0])
+
+print(d) # {'a': [0, 0], 'b': [0, 0], 'c': [0, 0]}
+ 
+d['a'] is d['b'] # True, This is dangerous
+
+# Trick here is 
+
+value = [0, 0]
+print(id(list(value))) #..60424
+print(id(list(value))) #..58632
+
+# so 
+l = ['a','b','c']
+value = [0, 0]
+d = {key: list(value) for key in l}
+ 
+print(d) # {'a': [0, 0], 'b': [0, 0], 'c': [0, 0]}
+d['a'] is d['b'] # False, This is safe
+
+
 https://stackoverflow.com/questions/15516413/dict-fromkeys-all-point-to-same-list
------------------------->
-
-<------------------------
-https://codeburst.io/dictionary-view-objects-101-480b72f71dec
-    
-    - when dict changes, dictionary.keys(), dictionary.items() also changes dynamically
-
-A = {'a':0,'b':1}
-b = A.keys() # dict_keys(['a', 'b'])
-c = A.values() # dict_values([0, 1])
-A['a']=10
-print(c) # dict_values([10, 1])
 ------------------------>
 
 <------------------------
 type({}) # dict
 type({1}) # set
 type({1,2}) # set
+------------------------>
+
+<------------------------
+# when dict changes, dictionary.keys(), dictionary.items() also changes dynamically
+
+A = {'a':0,'b':1}
+b = A.keys() # dict_keys(['a', 'b'])
+c = A.values() # dict_values([0, 1])
+A['a']=10
+print(c) # dict_values([10, 1])
+
+https://codeburst.io/dictionary-view-objects-101-480b72f71dec
 ------------------------>
 
 <------------------------
