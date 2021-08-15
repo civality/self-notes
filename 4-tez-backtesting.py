@@ -1,3 +1,23 @@
+##############################################
+## In my paper, I used 3D tensor to train LSTM with multiple time series.
+##
+##    1. Time Axis
+##    2. Lagged Observations
+##    3. Store Axis
+##
+##    So, the thing we predict is sale amounts of a product.
+##    e.g. It uses multivariate series in day 0, 1 at store 0, 1, 2
+##         to predict sales in day 2 at each store.
+##
+##    I needed to write a custom library to carry out backtests on 3D data.
+##    The method parameters enable user to specify number of chunks to split data into.
+##    If you want the highest granularity, you can set N_folds = N_samples and 
+##    it will become walk forward validation. 
+## 
+## Note: The final method is at the bottom: get_splits(n_timepoints, window, n_splits, cur_split)
+##       The above stuff is just to build up the final idea and understand simpler cases.
+##############################################
+
 import numpy as np
 
 def windowize(arr, window):
